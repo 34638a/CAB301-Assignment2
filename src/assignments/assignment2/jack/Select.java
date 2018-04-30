@@ -7,22 +7,17 @@ package assignments.assignment2.jack;
 public class Select {
     private int opCounter = 0;
 
-    /*
-    Select Algorithm
-    Input:
-        A sorted array (A[0...n-1])
-        Location to insert pivot value
-
-        Index of n-1 element
-    Output:
-        Returns the value at index m in array slice A[l..h], if the slice
-        were sorted into nondecreasing order.
-    */
+    /**
+     * @param inputArray The sorted input array.
+     * @param l Location to insert pivot value.
+     * @param m Location of the middle.
+     * @param h Index of n-1 element.
+     * @return Returns the value at index m in array slice A[l..h], if the slice were sorted into nondecreasing order.
+     */
     int SelectAlgorithm(int[] inputArray, int l, int m, int h) {
         Partition partition = new Partition();
         int pos = partition.PartitionAlgorithm(inputArray, l, h);
         opCounter += partition.getOpCounter();
-        partition.resetOpCounter();
 
         opCounter++;    // If statement
         if (pos == m) {
@@ -40,11 +35,12 @@ public class Select {
         }
     }
 
+
+    /**
+     * Getter for property 'opCounter'.
+     * @return Value for property 'opCounter'.
+     */
     int getOpCounter() {
         return opCounter;
-    }
-
-    void resetOpCounter() {
-        opCounter = 0;
     }
 }

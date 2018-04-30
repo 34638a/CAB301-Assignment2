@@ -7,21 +7,17 @@ package assignments.assignment2.jack;
 public class Partition {
     private int opCounter = 0;
 
-    /*
-    Partition Algorithm
-    Input:
-        A sorted array (Array[0...n-1])
-        Location to insert pivot value
-        Index of n-1 element
-    Output:
-        Returns the index at which the ‘pivot’ element formerly at location A[l] is placed.
-    Description:
-        Partitions array slice A[l..h] by moving element A[l] to the position
-        it would have if the array slice was sorted, and by moving all
-        values in the slice smaller than A[l] to earlier positions, and all values
-        larger than or equal to A[l] to later positions. Returns the index at which
-        the ‘pivot’ element formerly at location A[l] is placed.
-    */
+
+    /**
+     * Partitions array slice A[l..h] by moving element A[l] to the position
+     * it would have if the array slice was sorted, and by moving all
+     * values in the slice smaller than A[l] to earlier positions, and all values
+     * larger than or equal to A[l] to later positions.
+     * @param inputArray The sorted input array.
+     * @param l Location to insert pivot value.
+     * @param h Index of n-1 element.
+     * @return Returns the index at which the ‘pivot’ element formerly at location A[l] is placed.
+     */
     int PartitionAlgorithm(int[] inputArray, int l, int h) {
         int pivotVal = inputArray[l];
         int pivotLoc = l;
@@ -46,11 +42,12 @@ public class Partition {
         return pivotLoc;
     }
 
+
+    /**
+     * Getter for property 'opCounter'.
+     * @return Value for property 'opCounter'.
+     */
     int getOpCounter() {
         return opCounter;
-    }
-
-    void resetOpCounter() {
-        opCounter = 0;
     }
 }

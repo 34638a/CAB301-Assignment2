@@ -2,32 +2,30 @@ package assignments.assignment2.core;
 
 import java.util.Random;
 
+/**
+ * Created by Jack's Surface on 30/04/2018.
+ * Authored by Jack
+ */
 public class ArrayGeneration {
-    /*
-    Populate and Sort Array
-    Input:
-        The desired size of the array
-        The max value of each element (exclusive)
-    Output:
-        An array of random sorted values
-    Description:
-        Creates, populates and sorts array.
-    */
+
+
+    /**
+     * Creates, populates and sorts array.
+     * @param arraySize The size of the generated array.
+     * @param maxValue The maximum value of each randomly generated element.
+     * @return An array of random sorted values.
+     */
     public int[] PopulateSortArray(int arraySize, int maxValue) {
         return SortArray(PopulateArray(arraySize, maxValue));
     }
 
 
-    /*
-    Populate Array
-    Input:
-        The desired size of the array
-        The max value of each element (exclusive)
-    Output:
-        An array of random unsorted values
-    Description:
-        Creates and populates a random array.
-    */
+    /**
+     * Creates and populates a random array.
+     * @param arraySize The size of the generated array.
+     * @param maxValue The maximum value of each randomly generated element.
+     * @return An array of random values.
+     */
     private int[] PopulateArray(int arraySize, int maxValue) {
         int[] inputArray = new int[arraySize];
         Random random = new Random();
@@ -41,15 +39,11 @@ public class ArrayGeneration {
     }
 
 
-    /*
-    Sort Array
-    Input:
-        An unsorted array
-    Output:
-        A sorted array
-    Description:
-        Sorts the given array.
-    */
+    /**
+     * Sorts the given array in ascending order.
+     * @param inputArray An unsorted array.
+     * @return A sorted array.
+     */
     private int[] SortArray(int[] inputArray) {
         int n = inputArray.length;
         int count = n - 1;

@@ -11,15 +11,11 @@ public class Median {
     private long exTime = 0;
     private int medianValue;
 
-    /*
-    Run Median
-    Input:
-        A sorted array (Array[0...n-1])
-    Output:
-        N/A
-    Description:
-        Runs the median algorithm and prints the results.
-    */
+
+    /**
+     * Runs the median algorithm and prints the results.
+     * @param inputArray The sorted input array.
+     */
     public void RunMedian(int[] inputArray) {
         long startTime;
         long endTime;
@@ -47,15 +43,10 @@ public class Median {
     }
 
 
-    /*
-    Median Algorithm
-    Input:
-        A sorted array (Array[0...n-1])
-    Output:
-        Median value
-    Description:
-        Returns the median value in a given array A of n numbers.
-    */
+    /**
+     * @param inputArray The sorted input array.
+     * @return Returns the median value in a given array A of n numbers.
+     */
     private int MedianAlgorithm(int[] inputArray) {
         Select select = new Select();
         int n = inputArray.length;
@@ -68,19 +59,33 @@ public class Median {
             opCounter++;    // If contents
             int result = select.SelectAlgorithm(inputArray, 0, (int)floor(n/2), n-1);// Third argument rounds down
             opCounter += select.getOpCounter();
-            select.resetOpCounter();
             return result;
         }
     }
 
+
+    /**
+     * Getter for property 'opCounter'.
+     * @return Value for property 'opCounter'.
+     */
     public int getOpCounter() {
         return opCounter;
     }
 
+
+    /**
+     * Getter for property 'exTime'.
+     * @return Value for property 'exTime'.
+     */
     public long getExTime() {
         return exTime;
     }
 
+
+    /**
+     * Getter for property 'medianValue'.
+     * @return Value for property 'medianValue'.
+     */
     public int getMedianValue() {
         return medianValue;
     }

@@ -16,11 +16,12 @@ public class Main {
         RunMultipleBruteForceMedian(numTrials, arraySizes, maxValue);
     }
 
+
 	/**
-	 * Perform multiple brute force attempts
-	 * @param numTrials
-	 * @param arraySizes
-	 * @param maxValue
+	 * Perform multiple brute force attempts.
+	 * @param numTrials The number of trials to run.
+	 * @param arraySizes An array of the desired array sizes.
+	 * @param maxValue The maximum random element value to generate.
 	 */
 	private static void RunMultipleBruteForceMedian(int numTrials, int[] arraySizes, int maxValue) {
 		CSV csv = new CSV();
@@ -29,8 +30,8 @@ public class Main {
 		int opCounter = 0;
 		long exTime = 0;
 
-		CreateCSV(csv, "median", "Operations", "Time");
-		CreateCSV(csvData, "medianData", "Input Array", "Median Value");
+		CreateCSV(csv, "bruteForceMedian", "Operations", "Time");
+		CreateCSV(csvData, "bruteForceMedianData", "Input Array", "Median Value");
 
 		for (int k = 1; k < arraySizes.length; k++) {
 			System.out.println("\n//-----//\nTest Array Size of " + arraySizes[k]);
@@ -70,21 +71,17 @@ public class Main {
 		}
 		csv.exportCSV();
 		csvData.exportCSV();
-		System.out.println("\n**************************\nMedian experiment complete\n**************************\n");
+		System.out.println("\n**************************\nBrute Force Median\nexperiment complete" +
+                "\n**************************\n");
 	}
 
-	/*
-	Run Multiple Median
-	Input:
-		An integer value of the number of trials to run
-		An array of the desired array sizes
-		The maximum random element value to generate
-	Output:
-		N/A
-	Description:
-		Runs multiple median tests of varying array size. Prints the current test details to the console,
-		adds the results and raw data to csv files and saves them in the project base directory.
-	*/
+
+    /**
+     * Perform median attempts.
+     * @param numTrials The number of trials to run.
+     * @param arraySizes An array of the desired array sizes.
+     * @param maxValue The maximum random element value to generate.
+     */
     private static void RunMultipleMedian(int numTrials, int[] arraySizes, int maxValue) {
         CSV csv = new CSV();
         CSV csvData = new CSV();
@@ -137,18 +134,15 @@ public class Main {
         System.out.println("\n**************************\nMedian experiment complete\n**************************\n");
     }
 
-    /*
-    Create CSV
-    Input:
-        An instance of a CSV object
-        The desired name of the CSV file
-        The name of the first column heading
-        The name of the second column heading
-    Output:
-        N/A
-    Description:
-        Initialises a CSV object and assigns a name and column headings.
-    */
+
+
+    /**
+     * Initialises a CSV object and assigns a name and column headings.
+     * @param csv An instance of a CSV object.
+     * @param name The desired name of the CSV file.
+     * @param headingOne The name of the first column heading.
+     * @param headingTwo The name of the second column heading.
+     */
     private static void CreateCSV(CSV csv, String name, String headingOne, String headingTwo) {
         csv.createCSV(name);
         csv.addString("Array Size");

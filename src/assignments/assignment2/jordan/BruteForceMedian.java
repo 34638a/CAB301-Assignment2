@@ -10,7 +10,7 @@ public class BruteForceMedian {
 	 * @param dataIn The data to analyse for a median.
 	 * @return float median value.
 	 */
-	private float bruteForce(int[] dataIn) {
+	public static int bruteForce(int[] dataIn) {
 		int numsmaller = 0;
 		int numequal = 0;
 		int i = 0;

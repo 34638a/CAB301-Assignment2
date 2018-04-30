@@ -10,7 +10,7 @@ public class ArrayGeneration {
 
 
     /**
-     * Creates, populates and sorts array.
+     * Creates, populates and sorts array for best case.
      * @param arraySize The size of the generated array.
      * @param maxValue The maximum value of each randomly generated element.
      * @return An array of random sorted values.
@@ -26,7 +26,7 @@ public class ArrayGeneration {
      * @param maxValue The maximum value of each randomly generated element.
      * @return An array of random values.
      */
-    private int[] PopulateArray(int arraySize, int maxValue) {
+    public int[] PopulateArray(int arraySize, int maxValue) {
         int[] inputArray = new int[arraySize];
         Random random = new Random();
 

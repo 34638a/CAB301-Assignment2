@@ -33,12 +33,11 @@ public class Partition {
                 inputArray[pivotLoc] = inputArray[j];
                 inputArray[j] = thirdHand;
             }
-            opCounter++;    // Swap
-            int thirdHand = inputArray[l];
-            inputArray[l] = inputArray[pivotLoc];
-            inputArray[pivotLoc] = thirdHand;
         }
-        opCounter++;    // Return
+        opCounter++;    // Swap
+        int thirdHand = inputArray[l];
+        inputArray[l] = inputArray[pivotLoc];
+        inputArray[pivotLoc] = thirdHand;
         return pivotLoc;
     }
 

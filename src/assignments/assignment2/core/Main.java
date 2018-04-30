@@ -10,7 +10,7 @@ public class Main {
     public static void main(final String[] args) {
         int maxValue = 1000;
         int numTrials = 10;
-        int[] arraySizes = {1, 10, 100, 1000, 10000};
+        int[] arraySizes = {10, 100, 1000, 10000, 100000};
 
         RunMultipleMedian(numTrials, arraySizes, maxValue);
         RunMultipleBruteForceMedian(numTrials, arraySizes, maxValue);
@@ -40,7 +40,7 @@ public class Main {
 
 				// Initialise
 				ArrayGeneration gen = new ArrayGeneration();
-				int[] inputArray = gen.PopulateSortArray(arraySizes[k], maxValue);
+				int[] inputArray = gen.PopulateArray(arraySizes[k], maxValue);
 				BruteForceMedian.RunMedian(inputArray);
 
 				// Grab the metrics
@@ -100,7 +100,7 @@ public class Main {
                 // Initialise
                 ArrayGeneration gen = new ArrayGeneration();
                 Median median = new Median();
-                int[] inputArray = gen.PopulateSortArray(arraySizes[k], maxValue);
+                int[] inputArray = gen.PopulateArray(arraySizes[k], maxValue);
                 median.RunMedian(inputArray);
 
                 // Grab the metrics

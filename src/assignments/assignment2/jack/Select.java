@@ -30,7 +30,6 @@ public class Select {
             opCounter++;    // If contents
             return SelectAlgorithm(inputArray, pos + 1, m, h);
         } else {
-            opCounter++;    // If contents
             return -1;
         }
     }

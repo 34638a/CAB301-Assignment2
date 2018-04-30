@@ -13,21 +13,78 @@ public class Main {
         int[] arraySizes = {1, 10, 100, 1000, 10000};
 
         RunMultipleMedian(numTrials, arraySizes, maxValue);
-        //RunMultipleBruteForceMedian(numTrials, arraySizes, maxValue);
+        RunMultipleBruteForceMedian(numTrials, arraySizes, maxValue);
     }
 
-    /*
-    Run Multiple Median
-    Input:
-        An integer value of the number of trials to run
-        An array of the desired array sizes
-        The maximum random element value to generate
-    Output:
-        N/A
-    Description:
-        Runs multiple median tests of varying array size. Prints the current test details to the console,
-        adds the results and raw data to csv files and saves them in the project base directory.
-    */
+	/**
+	 * Perform multiple brute force attempts
+	 * @param numTrials
+	 * @param arraySizes
+	 * @param maxValue
+	 */
+	private static void RunMultipleBruteForceMedian(int numTrials, int[] arraySizes, int maxValue) {
+		CSV csv = new CSV();
+		CSV csvData = new CSV();
+
+		int opCounter = 0;
+		long exTime = 0;
+
+		CreateCSV(csv, "median", "Operations", "Time");
+		CreateCSV(csvData, "medianData", "Input Array", "Median Value");
+
+		for (int k = 1; k < arraySizes.length; k++) {
+			System.out.println("\n//-----//\nTest Array Size of " + arraySizes[k]);
+			for (int i = 0; i < numTrials; i++) {
+				System.out.println("\nTest " + (i + 1) + " of " + numTrials);
+
+				// Initialise
+				ArrayGeneration gen = new ArrayGeneration();
+				int[] inputArray = gen.PopulateSortArray(arraySizes[k], maxValue);
+				BruteForceMedian.RunMedian(inputArray);
+
+				// Grab the metrics
+				opCounter = BruteForceMedian.getOpCounter();
+				exTime = BruteForceMedian.getExTime();
+
+				// Fill out results csv
+				csv.addInt(arraySizes[k]);
+				csv.addComma();
+				csv.addInt(opCounter);
+				csv.addComma();
+				csv.addLong(exTime);
+				csv.addComma();
+				csv.addString("\n");
+
+				// Fill out raw data csv
+				csvData.addInt(arraySizes[k]);
+				csvData.addComma();
+				for (int j = 0; j < inputArray.length; j++) {
+					csvData.addInt(inputArray[j]);
+					csvData.addString(" ");
+				}
+				csvData.addComma();
+				csvData.addLong(BruteForceMedian.getMedianValue());
+				csvData.addComma();
+				csvData.addString("\n");
+			}
+		}
+		csv.exportCSV();
+		csvData.exportCSV();
+		System.out.println("\n**************************\nMedian experiment complete\n**************************\n");
+	}
+
+	/*
+	Run Multiple Median
+	Input:
+		An integer value of the number of trials to run
+		An array of the desired array sizes
+		The maximum random element value to generate
+	Output:
+		N/A
+	Description:
+		Runs multiple median tests of varying array size. Prints the current test details to the console,
+		adds the results and raw data to csv files and saves them in the project base directory.
+	*/
     private static void RunMultipleMedian(int numTrials, int[] arraySizes, int maxValue) {
         CSV csv = new CSV();
         CSV csvData = new CSV();

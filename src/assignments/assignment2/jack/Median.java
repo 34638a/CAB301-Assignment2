@@ -4,8 +4,12 @@ import static java.lang.Math.floor;
 
 /**
  * Created by Jordan Laptop on 24/04/2018.
+ * Authored by Jack
  */
 public class Median {
+    private int opCounter = 0;
+    private long exTime = 0;
+
     /*
     Run Median
     Input:
@@ -16,9 +20,17 @@ public class Median {
         Runs the median algorithm and prints the results.
     */
     public void RunMedian(int[] inputArray) {
-        int result = MedianAlgorithm(inputArray);
+        long startTime;
+        int result;
+        long endTime;
 
         System.out.println("Executing Median");
+
+        startTime = System.nanoTime();
+        result = MedianAlgorithm(inputArray);
+        endTime = System.nanoTime();
+        exTime = endTime - startTime;
+
         System.out.print("Input Array = ");
         for (int i = 0; i < inputArray.length; i++) {
             System.out.print(inputArray[i]);
@@ -26,8 +38,11 @@ public class Median {
                 System.out.print(",");
             }
         }
+
         System.out.println();
         System.out.println("Median Value = " + result);
+        System.out.println("Op Count = " + opCounter);
+        System.out.println("Ex Time (ns) = " + exTime);
     }
 
 
@@ -44,10 +59,24 @@ public class Median {
         Select select = new Select();
         int n = inputArray.length;
 
+        opCounter++;    // If statement
         if (n == 1) {
+            opCounter++;    // If contents
             return inputArray[0];
         } else {
-            return select.SelectAlgorithm(inputArray, 0, (int)floor(n/2), n-1);  // Third argument rounds down
+            opCounter++;    // If contents
+            int result = select.SelectAlgorithm(inputArray, 0, (int)floor(n/2), n-1);// Third argument rounds down
+            opCounter += select.getOpCounter();
+            select.resetOpCounter();
+            return result;
         }
+    }
+
+    public int getOpCounter() {
+        return opCounter;
+    }
+
+    public long getExTime() {
+        return exTime;
     }
 }

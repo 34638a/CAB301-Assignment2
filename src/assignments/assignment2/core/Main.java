@@ -16,25 +16,44 @@ public class Main {
         //RunMultipleBruteForceMedian(numTrials, arraySizes, maxValue);
     }
 
+    /*
+    Run Multiple Median
+    Input:
+        An integer value of the number of trials to run
+        An array of the desired array sizes
+        The maximum random element value to generate
+    Output:
+        N/A
+    Description:
+        Runs multiple median tests of varying array size. Prints the current test details to the console,
+        adds the results and raw data to csv files and saves them in the project base directory.
+    */
     private static void RunMultipleMedian(int numTrials, int[] arraySizes, int maxValue) {
-        ArrayGeneration gen = new ArrayGeneration();
-        Median median = new Median();
         CSV csv = new CSV();
+        CSV csvData = new CSV();
 
         int opCounter = 0;
         long exTime = 0;
 
-        CreateCSV(csv, "median");
+        CreateCSV(csv, "median", "Operations", "Time");
+        CreateCSV(csvData, "medianData", "Input Array", "Median Value");
 
         for (int k = 1; k < arraySizes.length; k++) {
             System.out.println("\n//-----//\nTest Array Size of " + arraySizes[k]);
             for (int i = 0; i < numTrials; i++) {
                 System.out.println("\nTest " + (i + 1) + " of " + numTrials);
-                median.RunMedian(gen.PopulateSortArray(arraySizes[k], maxValue));
 
+                // Initialise
+                ArrayGeneration gen = new ArrayGeneration();
+                Median median = new Median();
+                int[] inputArray = gen.PopulateSortArray(arraySizes[k], maxValue);
+                median.RunMedian(inputArray);
+
+                // Grab the metrics
                 opCounter = median.getOpCounter();
                 exTime = median.getExTime();
 
+                // Fill out results csv
                 csv.addInt(arraySizes[k]);
                 csv.addComma();
                 csv.addInt(opCounter);
@@ -42,20 +61,46 @@ public class Main {
                 csv.addLong(exTime);
                 csv.addComma();
                 csv.addString("\n");
+
+                // Fill out raw data csv
+                csvData.addInt(arraySizes[k]);
+                csvData.addComma();
+                for (int j = 0; j < inputArray.length; j++) {
+                    csvData.addInt(inputArray[j]);
+                    csvData.addString(" ");
+                }
+                csvData.addComma();
+                csvData.addLong(median.getMedianValue());
+                csvData.addComma();
+                csvData.addString("\n");
             }
         }
         csv.exportCSV();
-        System.out.println("\n******************\nMedian experiment complete\n******************\n");
+        csvData.exportCSV();
+        System.out.println("\n**************************\nMedian experiment complete\n**************************\n");
     }
 
-    private static void CreateCSV(CSV csv, String name) {
+    /*
+    Create CSV
+    Input:
+        An instance of a CSV object
+        The desired name of the CSV file
+        The name of the first column heading
+        The name of the second column heading
+    Output:
+        N/A
+    Description:
+        Initialises a CSV object and assigns a name and column headings.
+    */
+    private static void CreateCSV(CSV csv, String name, String headingOne, String headingTwo) {
         csv.createCSV(name);
         csv.addString("Array Size");
         csv.addComma();
-        csv.addString("Operations");
+        csv.addString(headingOne);
         csv.addComma();
-        csv.addString("Time");
+        csv.addString(headingTwo);
         csv.addComma();
         csv.addString("\n");
     }
+
 }

@@ -9,6 +9,7 @@ import static java.lang.Math.floor;
 public class Median {
     private int opCounter = 0;
     private long exTime = 0;
+    private int medianValue;
 
     /*
     Run Median
@@ -21,13 +22,13 @@ public class Median {
     */
     public void RunMedian(int[] inputArray) {
         long startTime;
-        int result;
         long endTime;
+        medianValue = -1;
 
         System.out.println("Executing Median");
 
         startTime = System.nanoTime();
-        result = MedianAlgorithm(inputArray);
+        medianValue = MedianAlgorithm(inputArray);
         endTime = System.nanoTime();
         exTime = endTime - startTime;
 
@@ -40,7 +41,7 @@ public class Median {
         }
 
         System.out.println();
-        System.out.println("Median Value = " + result);
+        System.out.println("Median Value = " + medianValue);
         System.out.println("Op Count = " + opCounter);
         System.out.println("Ex Time (ns) = " + exTime);
     }
@@ -78,5 +79,9 @@ public class Median {
 
     public long getExTime() {
         return exTime;
+    }
+
+    public int getMedianValue() {
+        return medianValue;
     }
 }

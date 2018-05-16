@@ -10,7 +10,9 @@ public class Main {
     public static void main(final String[] args) {
         int maxValue = 1000;
         int numTrials = 10;
-        int[] arraySizes = {10, 100, 1000, 10000, 100000};
+
+        // First entry is only for time sacrificing. 1000 is slightly too small for milliseconds to measure.
+        int[] arraySizes = {1000, 10000, 50000, 100000, 500000, 1000000};
 
         RunMultipleMedian(numTrials, arraySizes, maxValue);
         RunMultipleBruteForceMedian(numTrials, arraySizes, maxValue);
@@ -40,12 +42,14 @@ public class Main {
 
 				// Initialise
 				ArrayGeneration gen = new ArrayGeneration();
+                BruteForceMedian bruteForceMedian = new BruteForceMedian();
 				int[] inputArray = gen.PopulateArray(arraySizes[k], maxValue);
-				BruteForceMedian.RunMedian(inputArray);
+				bruteForceMedian.RunBruteForceMedian(inputArray, false, false);
+                bruteForceMedian.RunBruteForceMedian(inputArray, false, true);
 
 				// Grab the metrics
-				opCounter = BruteForceMedian.getOpCounter();
-				exTime = BruteForceMedian.getExTime();
+				opCounter = bruteForceMedian.getOpCounter();
+				exTime = bruteForceMedian.getExTime();
 
 				// Fill out results csv
 				csv.addInt(arraySizes[k]);
@@ -64,7 +68,7 @@ public class Main {
 					csvData.addString(" ");
 				}
 				csvData.addComma();
-				csvData.addLong(BruteForceMedian.getMedianValue());
+				csvData.addLong(bruteForceMedian.getMedianValue());
 				csvData.addComma();
 				csvData.addString("\n");
 			}
@@ -101,7 +105,8 @@ public class Main {
                 ArrayGeneration gen = new ArrayGeneration();
                 Median median = new Median();
                 int[] inputArray = gen.PopulateArray(arraySizes[k], maxValue);
-                median.RunMedian(inputArray);
+                median.RunMedian(inputArray, true, false);
+                median.RunMedian(inputArray, true, true);
 
                 // Grab the metrics
                 opCounter = median.getOpCounter();

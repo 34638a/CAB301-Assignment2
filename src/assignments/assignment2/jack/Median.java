@@ -15,39 +15,51 @@ public class Median {
     /**
      * Runs the median algorithm and prints the results.
      * @param inputArray The sorted input array.
+     * @param printInput Print the input array to console.
+     * @param isOps Determines whether to run for time results or operations results.
      */
-    public void RunMedian(int[] inputArray) {
+    public void RunMedian(int[] inputArray, boolean printInput, boolean isOps) {
         long startTime;
         long endTime;
         medianValue = -1;
 
-        System.out.println("Executing Median");
+        if (isOps) {
+            System.out.println("Executing Median Ops");
+            medianValue = MedianAlgorithmOps(inputArray);
+        } else {
+            System.out.println("Executing Median Time");
+            startTime = System.currentTimeMillis();
+            medianValue = MedianAlgorithmTime(inputArray);
+            endTime = System.currentTimeMillis();
+            exTime = endTime - startTime;
+        }
 
-        startTime = System.nanoTime();
-        medianValue = MedianAlgorithm(inputArray);
-        endTime = System.nanoTime();
-        exTime = endTime - startTime;
-
-        System.out.print("Input Array = ");
-        for (int i = 0; i < inputArray.length; i++) {
-            System.out.print(inputArray[i]);
-            if (i != inputArray.length - 1) {
-                System.out.print(",");
+        if (printInput) {
+            System.out.print("Input Array = ");
+            for (int i = 0; i < inputArray.length; i++) {
+                System.out.print(inputArray[i]);
+                if (i != inputArray.length - 1) {
+                    System.out.print(",");
+                }
             }
         }
 
-        System.out.println();
         System.out.println("Median Value = " + medianValue);
-        System.out.println("Op Count = " + opCounter);
-        System.out.println("Ex Time (ns) = " + exTime);
+        if (isOps) {
+            System.out.println("Op Count = " + opCounter);
+        } else {
+            System.out.println("Ex Time (milli) = " + exTime);
+        }
+        System.out.println();
     }
 
 
     /**
+     * @implNote Basic operations version.
      * @param inputArray The sorted input array.
      * @return Returns the median value in a given array A of n numbers.
      */
-    private int MedianAlgorithm(int[] inputArray) {
+    private int MedianAlgorithmOps(int[] inputArray) {
         Select select = new Select();
         int n = inputArray.length;
 
@@ -57,8 +69,26 @@ public class Median {
             return inputArray[0];
         } else {
             opCounter++;    // If contents
-            int result = select.SelectAlgorithm(inputArray, 0, (int)floor(n/2), n-1);// Third argument rounds down
+            int result = select.SelectAlgorithmOps(inputArray, 0, (int)floor(n/2), n-1);// Third argument rounds down
             opCounter += select.getOpCounter();
+            return result;
+        }
+    }
+
+
+    /**
+     * @implNote Execution time version.
+     * @param inputArray The sorted input array.
+     * @return Returns the median value in a given array A of n numbers.
+     */
+    private int MedianAlgorithmTime(int[] inputArray) {
+        Select select = new Select();
+        int n = inputArray.length;
+
+        if (n == 1) {
+            return inputArray[0];
+        } else {
+            int result = select.SelectAlgorithmTime(inputArray, 0, (int)floor(n/2), n-1);// Third argument rounds down
             return result;
         }
     }

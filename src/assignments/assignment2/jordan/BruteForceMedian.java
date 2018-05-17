@@ -60,7 +60,7 @@ public class BruteForceMedian {
 		int numequal = 0;
 		int i = 0;
 		int j = 0;
-		final int k = dataIn.length/2;
+		final int k = (dataIn.length/2) + 1;
 
 		for (i = 0; i < dataIn.length; i++) {
 			numsmaller = 0;
@@ -91,7 +91,7 @@ public class BruteForceMedian {
 		int numequal = 0;
 		int i = 0;
 		int j = 0;
-		final int k = dataIn.length/2;
+		final int k = (dataIn.length/2) + 1;
 
 		for (i = 0; i < dataIn.length; i++) {
 			numsmaller = 0;

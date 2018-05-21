@@ -22,13 +22,10 @@ public class Select {
 
         opCounter++;    // If statement
         if (pos == m) {
-            opCounter++;    // If contents
             return inputArray[pos];
         } else if (pos > m) {
-            opCounter++;    // If contents
             return SelectAlgorithmOps(inputArray, l, m, pos - 1);
         } else if (pos < m) {
-            opCounter++;    // If contents
             return SelectAlgorithmOps(inputArray, pos + 1, m, h);
         } else {
             return -1;

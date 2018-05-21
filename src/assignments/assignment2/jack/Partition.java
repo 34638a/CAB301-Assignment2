@@ -23,19 +23,15 @@ public class Partition {
         int pivotVal = inputArray[l];
         int pivotLoc = l;
 
-        opCounter++;    // For loop
         for (int j = l + 1; j <= h; j++) {
             opCounter++;    // If statement
             if (inputArray[j] < pivotVal) {
-                opCounter++;    // If contents - assignment
                 pivotLoc = pivotLoc + 1;
-                opCounter++;    // If contents - swap
                 int thirdHand = inputArray[pivotLoc];
                 inputArray[pivotLoc] = inputArray[j];
                 inputArray[j] = thirdHand;
             }
         }
-        opCounter++;    // Swap
         int thirdHand = inputArray[l];
         inputArray[l] = inputArray[pivotLoc];
         inputArray[pivotLoc] = thirdHand;

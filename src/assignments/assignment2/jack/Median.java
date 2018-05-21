@@ -65,10 +65,8 @@ public class Median {
 
         opCounter++;    // If statement
         if (n == 1) {
-            opCounter++;    // If contents
             return inputArray[0];
         } else {
-            opCounter++;    // If contents
             int result = select.SelectAlgorithmOps(inputArray, 0, (int)floor(n/2), n-1);// Third argument rounds down
             opCounter += select.getOpCounter();
             return result;

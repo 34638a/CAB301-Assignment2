@@ -50,6 +50,35 @@ public class BruteForceMedian {
 		System.out.println();
 	}
 
+	public int bruteForce(int[] dataIn) {
+		int numsmaller = 0;
+		int numequal = 0;
+		int i = 0;
+		int j = 0;
+		final int k = (dataIn.length/2) + 1;
+
+		for (i = 0; i < dataIn.length; i++) {
+			numsmaller = 0;
+			numequal = 0;
+			for (j = 0; j < dataIn.length; j++) {
+				//Operation 1
+				if (dataIn[i] > dataIn[j]) {
+					numsmaller++;
+				//Operation 2
+				} else if (dataIn[i] == dataIn[j]) {
+					numequal++;
+				}
+			}
+
+			//Operation 3
+			if (numsmaller < k && k <= (numsmaller + numequal)) {
+				return dataIn[i];
+			}
+		}
+
+		return dataIn[0];
+	}
+
 	/**
 	 * Given any array of length n with the data type of primitive integer(32 bits long). Find the median of the array.
 	 * @param dataIn The data to analyse for a median.
